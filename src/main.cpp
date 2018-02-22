@@ -56,10 +56,13 @@ unsigned long lastTick = 0;
 
 void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
+  digitalWrite(LED_BUILTIN, HIGH);
+  delay(1000);
+  Serial.begin(115200);
 }
 
 void loop() {
-  if (!Serial) {
+  if (!Serport) {
     // Nobody is connected to the serial port. Blink a little heartbeat
     if (connected) {
       tick = 0;

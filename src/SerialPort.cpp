@@ -7,16 +7,17 @@
  */
 
 #include "SerialPort.h"
+// Note: Serport is defined in SerialPort.h
 
 #include <Arduino.h>
 
 SerialPort::SerialPort() {
-  Serial.begin(115200);
+  Serport.begin(115200);
 }
 
 bool SerialPort::Connect() {
   // Wait for the serial port to connect. Needed for native USB
-  while (!Serial) {
+  while (!Serport) {
     ;
   }
   return true;
@@ -26,8 +27,8 @@ bool SerialPort::Connect() {
 // read or -1 if no character was available.
 // virtual
 int SerialPort::ReadByte() {
-  if (Serial.available() > 0) {
-    return Serial.read();
+  if (Serport.available() > 0) {
+    return Serport.read();
   }
   return -1;
 }
@@ -35,5 +36,6 @@ int SerialPort::ReadByte() {
 // Writes a block of data to the communications device.
 // virtual
 void SerialPort::Write(const void *data, size_t len) {
-  Serial.write(static_cast<const uint8_t *>(data), len);
+  Serport.write(static_cast<const uint8_t *>(data), len);
 }
+

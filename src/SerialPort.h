@@ -13,6 +13,17 @@
 
 #include <stddef.h>
 
+#if defined(ARDUINO_SAM_ZERO)
+#define Serport SerialUSB
+//String brd = "SAM_ZERO";
+#elif defined(ARDUINO_SAMD_MKR1000)
+#define Serport Serial
+//String brd = "SAMD_MKR1000";
+#else
+#define Serport Serial
+//String brd = "OTHER";
+#endif
+
 class SerialPort : public CommPort {
 public:
   SerialPort();
@@ -29,3 +40,4 @@ public:
 };
 
 #endif // SerialPort_h
+
